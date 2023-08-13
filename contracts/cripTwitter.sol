@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.18;
 
-struct Tweet{
+struct Tweet {
     address author;
     string text;
     uint timestamp;
@@ -11,13 +11,13 @@ struct Tweet{
 
 contract CrypTwitter {
 
-    uint public nextId = 0; // começa em 0 por default
-    
+    uint public nextId = 0;
+
     uint public constant PAGE_SIZE = 10;
 
     mapping(uint => Tweet) public tweets;
 
-    mapping (address => string) public users;
+    mapping(address => string) public users;
 
     function addTweet(string calldata text) public {
         Tweet memory newTweet;
@@ -29,27 +29,20 @@ contract CrypTwitter {
         tweets[nextId] = newTweet;
     }
 
-    function changeUserName(string calldata newName) public {
+    function changeUsername(string calldata newName) public {
         users[msg.sender] = newName;
-
     }
 
     function getLastTweets(uint page) public view returns (Tweet[] memory) {
         if(page < 1) page = 1;
-        uint startIndex = (PAGE_SIZE * (page - 1) + 1);
+        uint startIndex = (PAGE_SIZE * (page - 1)) + 1;
 
-        Tweet[] memory lastTwetts = new Tweet[](PAGE_SIZE);
+        Tweet[] memory lastTweets = new Tweet[](PAGE_SIZE);
         for(uint i=0; i < PAGE_SIZE; i++){
-            lastTwetts[i] = tweets[startIndex + i];
-            lastTwetts[i].username = users[lastTwetts[i].author];
+            lastTweets[i] = tweets[startIndex + i];
+            lastTweets[i].username = users[lastTweets[i].author];
         }
 
-        return lastTwetts;
+        return lastTweets;
     }
-
-    // function deleteUsers() public {
-    //     delete users[msg.sender];
-    // }
-
-
 }

@@ -2,16 +2,21 @@
 import Head from "next/head"
 import { doLogin } from "@/services/Web3Services";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-  const [message, setMessage] = useState("");
+  const { push } = useRouter();
+  const [ message, setMessage ] = useState("");
 
   function btnLoginClick(){
     setMessage("Conectando com a metamask...aguarde...");
     doLogin()
-      .then(wallet => setMessage(wallet))
-      .catch(err => setMessage(err))
+      .then(wallet => push("/timeline"))
+      .catch(err => {
+        console.error(err);
+        setMessage(err.message);
+      })
   }
 
   return (

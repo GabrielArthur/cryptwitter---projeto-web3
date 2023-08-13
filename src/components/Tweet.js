@@ -1,10 +1,10 @@
-import { generateAvatarHTML } from "@cfx-kit/wallet-avatar"
+import { generateAvatarURL } from "@cfx-kit/wallet-avatar"
 
 export default function Tweet(props){
-    return(
+    return (
         <>
             <div className="tweet">
-                <img className="tweet_author_logo" src={generateAvatarHTML(props.data.author)}/>
+                <img className="tweet_author_logo" src={generateAvatarURL(props.data.author)} />
                 <div>
                     <div className="tweet_header">
                         <div className="tweet_author_name">

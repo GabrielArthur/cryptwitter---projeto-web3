@@ -11,7 +11,7 @@ export default function NewTweet() {
     const [message, setMessage] = useState("");
     const { push } = useRouter();
 
-    function btnPublishClick(){
+    function btnPublishClick() {
         setMessage("Enviando seu tweet para a blockchain...aguarde...");
         addTweet(text)
             .then(result => {
@@ -26,24 +26,24 @@ export default function NewTweet() {
 
     useEffect(() => {
         const wallet = localStorage.getItem("wallet");
-        if(!wallet){
+        if (!wallet)
             push("/");
-        }
     }, [])
 
-    return(
+    return (
         <>
             <div className="top">
                 <div className="left">
-                    <img src="/twitter.svg" className="brand"/>
+                    <img src="/twitter.svg" className="brand" />
                 </div>
                 <h1>
-                    Welcome back!
+                    Bem vindo de volta!
                 </h1>
-                <p>What is happening?</p>
-                <textarea className="form-control my-3" value={text} onChange={evt => setText(evt.target.value)}></textarea>
+                <p>O que está acontecendo?</p>
+                <textarea className="form-control my-3" value={text} onChange={evt => setText(evt.target.value)}>
+                </textarea>
                 <div>
-                    <input type="button" onClick={btnPublishClick} className="btn btn-primary" value="Tweet" />
+                    <input type="button" onClick={btnPublishClick} className="btn btn-primary" value="Enviar" />
                     <span className="message">
                         {message}
                     </span>
